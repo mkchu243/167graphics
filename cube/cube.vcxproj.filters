@@ -33,7 +33,10 @@
     <ClInclude Include="vector4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix4_2.h">
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="house.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,7 +59,10 @@
     <ClCompile Include="Vector4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Matrix4_2.cpp">
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="house.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

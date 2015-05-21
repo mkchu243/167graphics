@@ -2,10 +2,12 @@
 #define _MAIN_H_
 
 #include "Cube.h"
+#include "Camera.h"
 
 namespace Globals
 {
     extern Cube cube;
+    extern Camera camera;
 };
 
 #endif

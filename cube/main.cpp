@@ -11,12 +11,14 @@
 
 #include "vector3.h"
 #include "vector4.h"
+#include "Camera.h"
 
 using namespace std;
 
 namespace Globals
 {
   Cube cube;
+  Camera camera;
 };
 
 void testVector4();
@@ -25,7 +27,14 @@ void testMatrix4();
 
 int main(int argc, char *argv[])
 {
-  testMatrix4();
+  //Vector3 centerOfProj(-15,5,10);
+  //Vector3 lookAtPoint(-5,0,0);
+  //Vector3 up(0,1,0.5);
+
+  Vector3 centerOfProj(0,10,10);
+  Vector3 lookAtPoint(0,0,0);
+  Vector3 up(0,1,0);
+  Globals::camera = Camera(centerOfProj, lookAtPoint, up);
 
   float specular[]  = {1.0, 1.0, 1.0, 1.0};
   float shininess[] = {100.0};
@@ -54,12 +63,13 @@ int main(int argc, char *argv[])
   glLightfv(GL_LIGHT0, GL_POSITION, position);
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
-  
+  glDisable(GL_LIGHTING);
   // Install callback functions:
   glutDisplayFunc(Window::displayCallback);
   glutReshapeFunc(Window::reshapeCallback);
   glutIdleFunc(Window::idleCallback);
   glutKeyboardFunc(Window::glutKeyboardFunc);
+  glutSpecialFunc(Window::glutSpecialFunc);
     
   // Initialize cube matrix:
   Globals::cube.getMatrix().identity();

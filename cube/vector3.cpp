@@ -48,12 +48,12 @@ double Vector3::operator[](int i)
   }
 }
 
-Vector3 Vector3::add(const Vector3& a, const Vector3& b)
+Vector3 Vector3::add(const Vector3& a, const Vector3& b) const
 {
   return Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
 }
 
-Vector3 Vector3::operator+(const Vector3& v)
+Vector3 Vector3::operator+(const Vector3& v) const
 {
   return add(*this, v);
 }
@@ -65,12 +65,12 @@ void Vector3::operator=(const Vector3& v)
   z = v.z;
 }
 
-Vector3 Vector3::sub(const Vector3& a, const Vector3& b)
+Vector3 Vector3::sub(const Vector3& a, const Vector3& b) const
 {
   return Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
 }
 
-Vector3 Vector3::operator-(const Vector3& v)
+Vector3 Vector3::operator-(const Vector3& v) const
 {
   return sub(*this, v);
 }

@@ -14,7 +14,8 @@ Matrix4& Cube::getMatrix()
   currentRotationZ.makeRotateAxis(angleZ, 0, 0, 1);
   Matrix4 scaleMat = Matrix4::makeScaling(scale.getX(), scale.getY(), scale.getZ());
   Matrix4 translationMatrix = Matrix4::makeTranslation(translations.getX(), translations.getY(), translations.getZ());
-  return currentRotationZ.multiply(translationMatrix.multiply(scaleMat.multiply(currentRotationY)));
+  model2world = currentRotationZ.multiply(translationMatrix.multiply(scaleMat.multiply(currentRotationY)));
+  return model2world;
 }
 
 void Cube::reset()

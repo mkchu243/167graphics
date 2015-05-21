@@ -7,7 +7,7 @@ class Vector4
 {
 private:
     double w;
-    Vector3* v3;
+    Vector3 v3;
 
   public:
     Vector4(double x, double y, double z);

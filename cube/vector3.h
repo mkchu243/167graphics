@@ -17,10 +17,10 @@ private:
     double getZ();
     void operator=(const Vector3& v);
     double operator[](int i);
-    Vector3 add(const Vector3& a,const Vector3& b);
-    Vector3 operator+(const Vector3& v);
-    Vector3 sub(const Vector3& a, const Vector3& b);
-    Vector3 operator-(const Vector3& v);
+    Vector3 add(const Vector3& a,const Vector3& b) const;
+    Vector3 operator+(const Vector3& v) const;
+    Vector3 sub(const Vector3& a, const Vector3& b) const;
+    Vector3 operator-(const Vector3& v) const;
     void negate();
     void scale(double s);
     static double dotProduct(const Vector3& a, const Vector3& b);
