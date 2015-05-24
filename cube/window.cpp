@@ -85,8 +85,13 @@ void Window::drawHouse()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  // clear color and depth buffers
   glMatrixMode(GL_MODELVIEW);  // make sure we're in Modelview mode
 
+
+  double mat[16] = { 1, 0, 0, 0,
+    0, 0.707, 0.707, 0, 
+    0, -0.707, 0.707, 0,
+    0, 0, -14.443, 1};
     // Tell OpenGL what ModelView matrix to use:
-  glLoadMatrixd(Globals::camera.getCameraMatrix());
+  glLoadMatrixd(mat);
   //gluLookAt(0.0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
   glEnableClientState( GL_COLOR_ARRAY );

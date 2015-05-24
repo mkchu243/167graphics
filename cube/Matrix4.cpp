@@ -20,23 +20,23 @@ Matrix4::Matrix4(double x0, double x1, double x2, double x3,
                     double x12, double x13, double x14, double x15)
 {
   m[0][0] = x0;
-  m[0][1] = x4;
-  m[0][2] = x8;
-  m[0][3] = x12;
+  m[0][1] = x1;
+  m[0][2] = x2;
+  m[0][3] = x3;
 
-  m[1][0] = x1;
+  m[1][0] = x4;
   m[1][1] = x5;
-  m[1][2] = x9;
-  m[1][3] = x13;
+  m[1][2] = x6;
+  m[1][3] = x7;
   
-  m[2][0] = x2;
-  m[2][1] = x6;
+  m[2][0] = x8;
+  m[2][1] = x9;
   m[2][2] = x10;
-  m[2][3] = x14;
+  m[2][3] = x11;
   
-  m[3][0] = x3;
-  m[3][1] = x7;
-  m[3][2] = x11;
+  m[3][0] = x12;
+  m[3][1] = x13;
+  m[3][2] = x14;
   m[3][3] = x15;
 }
 
@@ -104,6 +104,88 @@ Vector4 Matrix4::multiply(Vector4& v)
   }
   return Vector4(vec[0], vec[1], vec[2], vec[3]);
 }
+
+double Matrix4::determinant()
+{
+  double determinant = 0;
+  int sign = 1;
+  for(int i=0; i < 4; i++)
+  {
+    determinant += m[0][i] * sign * determinant3(0,i);
+    sign *= -1;
+  }
+  return determinant;
+}
+
+double Matrix4::determinant3(int row, int col)
+{
+  double sum = 0;
+  for( int i = 0; i < 4; i++){
+    if( i != col ){
+      sum += determinantDiagHelper(0, i, row, col, true);
+    }
+  }
+  for( int i = 0; i < 4; i++){
+    if( i != col ){
+      sum -= determinantDiagHelper(0, i, row, col, false);
+    }
+  }
+  return sum;
+}
+
+double Matrix4::determinantDiagHelper(int startRow, int startCol, int unusedRow, int unusedCol, bool forward)
+{
+  int currRow = startRow;
+  int currCol = startCol;
+  double product = 1;
+
+  int increment = forward ? 1 : -1;
+  if(currRow == unusedRow) 
+  {
+    currRow += 1;
+  }
+  if(currCol == unusedCol)
+  {
+    currCol += increment;
+  }
+  currRow = currRow %4;
+  currCol = currCol %4;
+
+  for(int i = 0; i < 3; i++)
+  {
+    currRow = currRow %4;
+    currCol = currCol %4;
+    if(currRow < 0){
+      currRow += 4;
+    }
+    if(currCol <0){
+      currCol += 4;
+    }
+
+    if(currRow == unusedRow){
+      currRow += 1;
+    }
+    if(currCol == unusedCol){
+      currCol += increment;
+    }
+
+    currRow = currRow %4;
+    currCol = currCol %4;
+    if(currRow < 0){
+      currRow += 4;
+    }
+    if(currCol <0){
+      currCol += 4;
+    }
+
+    product *= m[currRow][currCol];
+    currCol += increment;
+    currRow += 1;
+  }
+
+  return product;
+}
+
 
 // set matrix to identity matrix
 void Matrix4::identity()

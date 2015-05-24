@@ -27,6 +27,14 @@ void testMatrix4();
 
 int main(int argc, char *argv[])
 {
+    Matrix4 matrix = Matrix4(
+      5, 5, 5, 5,
+      5, 6, 4, 8,
+      3, 3, 5, 12,
+      13, 14, 15, 16);
+
+    std::cout << matrix.determinant();
+
   //Vector3 centerOfProj(-15,5,10);
   //Vector3 lookAtPoint(-5,0,0);
   //Vector3 up(0,1,0.5);

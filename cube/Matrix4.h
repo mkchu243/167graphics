@@ -11,6 +11,10 @@ class Matrix4
     double MulRowByCol(Matrix4& m1, Matrix4&m2, int row, int col);
     
   public:
+    double determinant3(int row, int col);
+    double determinantDiagHelper(int startRow, int startCol, int unusedRow, int unusedCol, bool forward);
+
+  public:
     Matrix4();
     Matrix4(double x0, double x1, double x2, double x3,
           double x4, double x5, double x6, double x7,
@@ -21,12 +25,14 @@ class Matrix4
     double* getPointer(); 
     Matrix4 multiply(Matrix4& mat);
     Vector4 multiply(Vector4& v);
+    double determinant();
+    void inverse();
     void identity(); 
     void transpose();
     void makeRotateX(double angle); 
     void makeRotateY(double angle); 
     void makeRotateZ(double angle); 
-    void makeRotateAxis(double angle, double ax, double ay, double az); 
+    void makeRotateAxis(double angle, double ax, double ay, double az);
     static Matrix4 makeScaling(double sx, double sy, double sz);
     static Matrix4 makeTranslation(double tx, double ty, double tz);
     std::string toString();

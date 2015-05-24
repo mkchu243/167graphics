@@ -6,7 +6,7 @@
 
 class Camera
 {
-protected:
+public:
   Matrix4 matrix;
 
 public:
