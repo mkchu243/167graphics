@@ -29,6 +29,7 @@ class Matrix4
     void inverse();
     void identity(); 
     void transpose();
+    void scale(double s);
     void makeRotateX(double angle); 
     void makeRotateY(double angle); 
     void makeRotateZ(double angle); 

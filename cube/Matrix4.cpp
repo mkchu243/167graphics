@@ -117,6 +117,41 @@ double Matrix4::determinant()
   return determinant;
 }
 
+void Matrix4::inverse()
+{
+  Matrix4 cofactor;
+  for(int i = 0; i < 4; i++)
+  {
+    int sign = i % 2 == 0 ? 1 : -1;
+    for(int j = 0; j < 4; j++)
+    {
+      cofactor.m[i][j] = sign * determinant3(i,j);
+      sign *= -1;
+    }
+  }
+  cofactor.transpose();
+  cofactor.scale(1/determinant());
+  cofactor.print();
+  for(int i = 0; i < 4; i++)
+  {
+    for(int j = 0; j < 4; j++)
+    {
+      m[i][j] = cofactor.m[i][j];
+    }
+  }
+}
+
+void Matrix4::scale(double s)
+{
+  for(int i = 0; i < 4; i++)
+  {
+    for(int j = 0; j < 4; j++)
+    {
+      m[i][j] = m[i][j] * s;
+    }
+  }
+}
+
 double Matrix4::determinant3(int row, int col)
 {
   double sum = 0;

@@ -91,7 +91,7 @@ void Window::drawHouse()
     0, -0.707, 0.707, 0,
     0, 0, -14.443, 1};
     // Tell OpenGL what ModelView matrix to use:
-  glLoadMatrixd(mat);
+  glLoadMatrixd(Globals::camera.getCameraMatrix());
   //gluLookAt(0.0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
   glEnableClientState( GL_COLOR_ARRAY );

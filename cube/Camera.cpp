@@ -16,7 +16,9 @@ Camera::Camera(Vector3& centerOfProj, Vector3& lookAtPoint, Vector3& up)
     xAxis[1], yAxis[1], zAxis[1], centerOfProj[1],
     xAxis[2], yAxis[2], zAxis[2], centerOfProj[2],
     0, 0, 0, 1);
-  
+
+  matrix.inverse();
+  matrix.transpose(); // for opengl
 }
 
 

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <string>
 
 #include <GL/glut.h>
 
@@ -27,21 +28,13 @@ void testMatrix4();
 
 int main(int argc, char *argv[])
 {
-    Matrix4 matrix = Matrix4(
-      5, 5, 5, 5,
-      5, 6, 4, 8,
-      3, 3, 5, 12,
-      13, 14, 15, 16);
+  Vector3 centerOfProj(-15,5,10);
+  Vector3 lookAtPoint(-5,0,0);
+  Vector3 up(0,1,0.5);
 
-    std::cout << matrix.determinant();
-
-  //Vector3 centerOfProj(-15,5,10);
-  //Vector3 lookAtPoint(-5,0,0);
-  //Vector3 up(0,1,0.5);
-
-  Vector3 centerOfProj(0,10,10);
-  Vector3 lookAtPoint(0,0,0);
-  Vector3 up(0,1,0);
+  //Vector3 centerOfProj(0,10,10);
+  //Vector3 lookAtPoint(0,0,0);
+  //Vector3 up(0,1,0);
   Globals::camera = Camera(centerOfProj, lookAtPoint, up);
 
   float specular[]  = {1.0, 1.0, 1.0, 1.0};
