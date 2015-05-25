@@ -13,7 +13,7 @@ using namespace std;
 
 int Window::width  = 512;   // set window width in pixels here
 int Window::height = 512;   // set window height in pixels here
-bool Window::cubeMode = false;
+bool Window::cubeMode = true;
 
 void Window::glutKeyboardFunc(unsigned char key,
                                    int x, int y)
@@ -25,6 +25,7 @@ void Window::glutKeyboardFunc(unsigned char key,
 
 void Window::glutSpecialFunc(int key, int x, int y)
 {
+  Globals::cube.glutSpecialFunc(key, x, y);
   switch(key)
   {
     case GLUT_KEY_F8:
@@ -85,7 +86,6 @@ void Window::drawHouse()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  // clear color and depth buffers
   glMatrixMode(GL_MODELVIEW);  // make sure we're in Modelview mode
 
-
   double mat[16] = { 1, 0, 0, 0,
     0, 0.707, 0.707, 0, 
     0, -0.707, 0.707, 0,
@@ -114,52 +114,61 @@ void Window::drawCube()
   glmatrix.transpose();
   glLoadMatrixd(glmatrix.getPointer());
 
-  // Draw all six faces of the cube:
-  glBegin(GL_QUADS);
-    glColor3f(Globals::cube.color.getX(), Globals::cube.color.getY(), Globals::cube.color.getZ());		// This makes the cube green; the parameters are for red, green and blue. 
-                                // To change the color of the other faces you will need to repeat this call before each face is drawn.
-    // Draw front face:
-    glNormal3f(0.0, 0.0, 1.0);   
-    glVertex3f(-5.0,  5.0,  5.0);
-    glVertex3f( 5.0,  5.0,  5.0);
-    glVertex3f( 5.0, -5.0,  5.0);
-    glVertex3f(-5.0, -5.0,  5.0);
+  if(Globals::cube.renderCube)
+  {
+    // Draw all six faces of the cube:
+    glBegin(GL_QUADS);
+      glColor3f(Globals::cube.color.getX(), Globals::cube.color.getY(), Globals::cube.color.getZ());		// This makes the cube green; the parameters are for red, green and blue. 
+                                  // To change the color of the other faces you will need to repeat this call before each face is drawn.
+      // Draw front face:
+      glNormal3f(0.0, 0.0, 1.0);   
+      glVertex3f(-5.0,  5.0,  5.0);
+      glVertex3f( 5.0,  5.0,  5.0);
+      glVertex3f( 5.0, -5.0,  5.0);
+      glVertex3f(-5.0, -5.0,  5.0);
     
-    // Draw left side:
-    glNormal3f(-1.0, 0.0, 0.0);
-    glVertex3f(-5.0,  5.0,  5.0);
-    glVertex3f(-5.0,  5.0, -5.0);
-    glVertex3f(-5.0, -5.0, -5.0);
-    glVertex3f(-5.0, -5.0,  5.0);
+      // Draw left side:
+      glNormal3f(-1.0, 0.0, 0.0);
+      glVertex3f(-5.0,  5.0,  5.0);
+      glVertex3f(-5.0,  5.0, -5.0);
+      glVertex3f(-5.0, -5.0, -5.0);
+      glVertex3f(-5.0, -5.0,  5.0);
     
-    // Draw right side:
-    glNormal3f(1.0, 0.0, 0.0);
-    glVertex3f( 5.0,  5.0,  5.0);
-    glVertex3f( 5.0,  5.0, -5.0);
-    glVertex3f( 5.0, -5.0, -5.0);
-    glVertex3f( 5.0, -5.0,  5.0);
+      // Draw right side:
+      glNormal3f(1.0, 0.0, 0.0);
+      glVertex3f( 5.0,  5.0,  5.0);
+      glVertex3f( 5.0,  5.0, -5.0);
+      glVertex3f( 5.0, -5.0, -5.0);
+      glVertex3f( 5.0, -5.0,  5.0);
   
-    // Draw back face:
-    glNormal3f(0.0, 0.0, -1.0);
-    glVertex3f(-5.0,  5.0, -5.0);
-    glVertex3f( 5.0,  5.0, -5.0);
-    glVertex3f( 5.0, -5.0, -5.0);
-    glVertex3f(-5.0, -5.0, -5.0);
+      // Draw back face:
+      glNormal3f(0.0, 0.0, -1.0);
+      glVertex3f(-5.0,  5.0, -5.0);
+      glVertex3f( 5.0,  5.0, -5.0);
+      glVertex3f( 5.0, -5.0, -5.0);
+      glVertex3f(-5.0, -5.0, -5.0);
   
-    // Draw top side:
-    glNormal3f(0.0, 1.0, 0.0);
-    glVertex3f(-5.0,  5.0,  5.0);
-    glVertex3f( 5.0,  5.0,  5.0);
-    glVertex3f( 5.0,  5.0, -5.0);
-    glVertex3f(-5.0,  5.0, -5.0);
+      // Draw top side:
+      glNormal3f(0.0, 1.0, 0.0);
+      glVertex3f(-5.0,  5.0,  5.0);
+      glVertex3f( 5.0,  5.0,  5.0);
+      glVertex3f( 5.0,  5.0, -5.0);
+      glVertex3f(-5.0,  5.0, -5.0);
   
-    // Draw bottom side:
-    glNormal3f(0.0, -1.0, 0.0);
-    glVertex3f(-5.0, -5.0, -5.0);
-    glVertex3f( 5.0, -5.0, -5.0);
-    glVertex3f( 5.0, -5.0,  5.0);
-    glVertex3f(-5.0, -5.0,  5.0);
-  glEnd();
+      // Draw bottom side:
+      glNormal3f(0.0, -1.0, 0.0);
+      glVertex3f(-5.0, -5.0, -5.0);
+      glVertex3f( 5.0, -5.0, -5.0);
+      glVertex3f( 5.0, -5.0,  5.0);
+      glVertex3f(-5.0, -5.0,  5.0);
+    glEnd();
+  } else {
+    glEnableClientState( GL_COLOR_ARRAY );
+    glEnableClientState( GL_VERTEX_ARRAY );
+    glColorPointer( 3, GL_FLOAT, 0, Globals::cube.s_colors);
+    glVertexPointer( 3, GL_FLOAT, 0, Globals::cube.s_vertices);
+    glDrawElements( GL_TRIANGLES, Globals::cube.s_nIndices, GL_UNSIGNED_INT, Globals::cube.s_indices );
+  }
   
   glFlush();  
   glutSwapBuffers();

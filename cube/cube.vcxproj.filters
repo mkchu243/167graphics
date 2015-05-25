@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\objects">
+      <UniqueIdentifier>{18fe3ba4-6e5c-4bae-ab94-5d55f2b76bbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cube.h">
@@ -37,6 +40,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="house.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objreader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,5 +71,27 @@
     <ClCompile Include="house.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="objreader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="objects\cow.obj">
+      <Filter>Resource Files\objects</Filter>
+    </Object>
+    <Object Include="objects\sphere.obj">
+      <Filter>Resource Files\objects</Filter>
+    </Object>
+    <Object Include="objects\teapot.obj">
+      <Filter>Resource Files\objects</Filter>
+    </Object>
+    <Object Include="objects\teddy.obj">
+      <Filter>Resource Files\objects</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="objects\bunny.obj">
+      <Filter>Resource Files\objects</Filter>
+    </Resource>
   </ItemGroup>
 </Project>

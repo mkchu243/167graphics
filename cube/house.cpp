@@ -1,4 +1,4 @@
- #include "house.h"
+#include "house.h"
 
 // This data structure defines a simple house
   

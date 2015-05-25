@@ -16,6 +16,7 @@
     <ClInclude Include="house.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Matrix4.h" />
+    <ClInclude Include="objreader.h" />
     <ClInclude Include="vector3.h" />
     <ClInclude Include="vector4.h" />
     <ClInclude Include="Window.h" />
@@ -26,9 +27,29 @@
     <ClCompile Include="house.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix4.cpp" />
+    <ClCompile Include="objreader.cpp" />
     <ClCompile Include="vector3.cpp" />
     <ClCompile Include="Vector4.cpp" />
     <ClCompile Include="window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="objects\bunny.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <DeploymentContent>true</DeploymentContent>
+    </Resource>
+    <Object Include="objects\cow.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="objects\sphere.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="objects\teapot.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="objects\teddy.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D405BB5A-866D-4310-82D7-4DADC145449D}</ProjectGuid>
@@ -78,6 +99,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;glut32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y $(ProjectDir)objects\* $(ProjectDir) 
+xcopy /y $(ProjectDir)objects\* $(OutDir) </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
