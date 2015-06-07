@@ -15,8 +15,10 @@
     <ClInclude Include="cube.h" />
     <ClInclude Include="house.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="map.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="objreader.h" />
+    <ClInclude Include="pgmLoader.h" />
     <ClInclude Include="vector3.h" />
     <ClInclude Include="vector4.h" />
     <ClInclude Include="Window.h" />
@@ -26,8 +28,10 @@
     <ClCompile Include="cube.cpp" />
     <ClCompile Include="house.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map.cpp" />
     <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="objreader.cpp" />
+    <ClCompile Include="pgmLoader.cpp" />
     <ClCompile Include="vector3.cpp" />
     <ClCompile Include="Vector4.cpp" />
     <ClCompile Include="window.cpp" />
@@ -50,6 +54,11 @@
     <Object Include="objects\teddy.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="objects\Heightmap.pgm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D405BB5A-866D-4310-82D7-4DADC145449D}</ProjectGuid>

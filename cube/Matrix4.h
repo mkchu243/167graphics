@@ -10,7 +10,6 @@ class Matrix4
     double m[4][4];   // matrix elements; first index is for rows, second for columns (row-major)
     double MulRowByCol(Matrix4& m1, Matrix4&m2, int row, int col);
     
-  public:
     double determinant3(int row, int col);
     double determinantDiagHelper(int startRow, int startCol, int unusedRow, int unusedCol, bool forward);
 

@@ -70,7 +70,7 @@ Vector4 Vector4::operator+(const Vector4& v)
 
 Vector4 Vector4::sub(const Vector4& a, const Vector4& b)
 {
-  if(a.w == 1 && b.w ==0 )
+  if(a.w == 1 && b.w == 0 )
   {
     Vector3 temp = a.v3 - b.v3;
     return Vector4(temp.getX(), temp.getY(), temp.getZ(), a.w - b.w);
@@ -81,6 +81,11 @@ Vector4 Vector4::sub(const Vector4& a, const Vector4& b)
 Vector4 Vector4::operator-(const Vector4& v)
 {
   return sub(*this, v);
+}
+
+Vector3 Vector4::getVector3()
+{
+  return Vector3(v3[0], v3[1], v3[2]);
 }
 
 void Vector4::dehomogenize()

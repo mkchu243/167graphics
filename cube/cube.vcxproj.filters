@@ -45,6 +45,12 @@
     <ClInclude Include="objreader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pgmLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cube.cpp">
@@ -74,6 +80,12 @@
     <ClCompile Include="objreader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pgmLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Object Include="objects\cow.obj">
@@ -93,5 +105,10 @@
     <Resource Include="objects\bunny.obj">
       <Filter>Resource Files\objects</Filter>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="objects\Heightmap.pgm">
+      <Filter>Resource Files\objects</Filter>
+    </None>
   </ItemGroup>
 </Project>

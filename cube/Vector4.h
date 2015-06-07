@@ -22,6 +22,7 @@ private:
     Vector4 operator+(const Vector4& v);
     Vector4 sub(const Vector4& a, const Vector4& b);
     Vector4 operator-(const Vector4& v);
+    Vector3 getVector3();
     void dehomogenize();
     std::string toString();
     void print();

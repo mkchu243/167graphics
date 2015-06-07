@@ -4,8 +4,9 @@
 class Window	  // OpenGL output window related routines
 {
   public:
+    enum renderMode{cube, house, map};
+    static renderMode currentMode;
     static int width, height; 	            // window size
-    static bool cubeMode;
 
     static void idleCallback(void);
     static void reshapeCallback(int, int);
@@ -17,6 +18,7 @@ class Window	  // OpenGL output window related routines
 private:
   static void drawCube();
   static void drawHouse();
+  static void drawMap();
 };
 
 #endif

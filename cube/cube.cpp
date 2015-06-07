@@ -8,6 +8,11 @@ Cube::Cube() : translations(0,0,0), color(0,1,0), scale(1,1,1), rd(), gen(rd), d
 {
   renderCube = true;
   s_nIndices = s_nVerts = 0;
+  s_vertices = nullptr;
+  s_normals = nullptr;
+  s_texcoords = nullptr;
+  s_indices = nullptr;
+  s_colors = nullptr;
   reset();
 }
 
@@ -75,19 +80,21 @@ void Cube::glutSpecialFunc(int key, int x, int y)
 
 void Cube::setShape(std::string objPath)
 {
+    delete s_colors;
+    delete s_vertices;
+    delete s_normals;
+    delete s_texcoords;
+    delete s_indices;
+
     renderCube = false;
     ObjReader::readObj((char *)objPath.c_str(), s_nVerts, &s_vertices, &s_normals, &s_texcoords, s_nIndices, &s_indices);
     s_colors = new float[s_nVerts*3];
-    std::cout << "size " <<  s_nVerts * 3 << std::endl;
+    //std::cout << "size " <<  s_nVerts * 3 << std::endl;
     for(int i = 0, index = 0; i < s_nVerts; i+=3, index+=9)
     {
       s_colors[index] = s_colors[index+3] = s_colors[index+6] = (float)dis(gen);
       s_colors[index+1] = s_colors[index+4] = s_colors[index+7] = (float)dis(gen);
       s_colors[index+2] = s_colors[index+5] = s_colors[index+8] = (float)dis(gen);
-    }
-    for(int i = 0; i < s_nVerts * 3; i=i+3)
-    {
-      //std::cout << i << ": " << s_colors[i] << "," << s_colors[i+1] << "," << s_colors[i+2] << "," << std::endl;
     }
 }
 

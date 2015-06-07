@@ -131,7 +131,7 @@ void Matrix4::inverse()
   }
   cofactor.transpose();
   cofactor.scale(1/determinant());
-  cofactor.print();
+  //cofactor.print();
   for(int i = 0; i < 4; i++)
   {
     for(int j = 0; j < 4; j++)

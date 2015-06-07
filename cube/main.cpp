@@ -8,11 +8,12 @@
 #include "Window.h"
 #include "Cube.h"
 #include "Matrix4.h"
-#include "main.h"
+#include "main.h" 
 
 #include "vector3.h"
 #include "vector4.h"
 #include "Camera.h"
+#include "map.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ namespace Globals
 {
   Cube cube;
   Camera camera;
+  Map map;
 };
 
 void testVector4();

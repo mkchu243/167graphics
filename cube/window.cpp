@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include <GL/glut.h>
 
 #include "Window.h"
@@ -8,18 +7,25 @@
 #include "main.h"
 #include "house.h"
 #include "Camera.h"
+#include "map.h"
 
 using namespace std;
 
 int Window::width  = 512;   // set window width in pixels here
 int Window::height = 512;   // set window height in pixels here
-bool Window::cubeMode = true;
+Window::renderMode Window::currentMode = cube;
 
 void Window::glutKeyboardFunc(unsigned char key,
                                    int x, int y)
 {
-  if(cubeMode){
-    Globals::cube.glutKeyboardFunc(key, x, y);
+  switch(currentMode)
+  {
+    case cube:
+      Globals::cube.glutKeyboardFunc(key, x, y);
+      break;
+    case map:
+      Globals::map.glutKeyboardFunc(key, x, y);
+      break;
   }
 }
 
@@ -28,11 +34,19 @@ void Window::glutSpecialFunc(int key, int x, int y)
   Globals::cube.glutSpecialFunc(key, x, y);
   switch(key)
   {
-    case GLUT_KEY_F8:
-      cubeMode = false;
+    case GLUT_KEY_F1:
+    case GLUT_KEY_F2:
+    case GLUT_KEY_F3:
+    case GLUT_KEY_F4:
+    case GLUT_KEY_F5:
+    case GLUT_KEY_F6:
+      currentMode = cube;
       break;
-    case GLUT_KEY_F9:
-      cubeMode = true;
+    case GLUT_KEY_F7:
+      currentMode = map;
+      break;
+    case GLUT_KEY_F8:
+      currentMode = house;
       break;
   }
 }
@@ -41,8 +55,14 @@ void Window::glutSpecialFunc(int key, int x, int y)
 // Callback method called when system is idle.
 void Window::idleCallback()
 {
-  if(cubeMode){
-    Globals::cube.idle();   // rotate cube; if it spins too fast try smaller values and vice versa
+  switch(currentMode)
+  {
+    case cube:
+      Globals::cube.idle();   // rotate cube; if it spins too fast try smaller values and vice versa
+      break;
+    case map:
+      Globals::map.idle();
+      break;
   }
   displayCallback();         // call display routine to show the cube
 }
@@ -55,17 +75,26 @@ void Window::reshapeCallback(int w, int h)
   width = w;
   height = h;
   glViewport(0, 0, w, h);  // set new viewport size
-  if(cubeMode)
-  {
+ switch(currentMode)
+ {
+   case cube:
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(60.0, double(width)/(double)height, 1.0, 1000.0); // set perspective projection viewing frustum
     glTranslatef(0, 0, -20);    // move camera back 20 units so that it looks at the origin (or else it's in the origin)
-  }  else  {
+    break;
+   case house:
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glFrustum(-10.0, 10.0, -10.0, 10.0, 10, 1000.0);
     glTranslatef(0, 0, -20);
+    break;
+   case map:
+      glMatrixMode(GL_PROJECTION);
+      glLoadIdentity();
+      glFrustum(-10.0, 10.0, -10.0, 10.0, 10, 1000.0);
+      //glTranslatef(0, 0, -20);
+     break;
   }
   glMatrixMode(GL_MODELVIEW);
 }
@@ -74,10 +103,17 @@ void Window::reshapeCallback(int w, int h)
 // Callback method called by GLUT when window readraw is necessary or when glutPostRedisplay() was called.
 void Window::displayCallback()
 {
- if(cubeMode){
-   Window::drawCube();
- } else {
-   Window::drawHouse();
+ switch(currentMode)
+ {
+   case cube:
+     Window::drawCube();
+     break;
+   case house:
+     Window::drawHouse();
+     break;
+   case map:
+     Window::drawMap();
+     break;
  }
 }
 
@@ -102,6 +138,24 @@ void Window::drawHouse()
   glFlush();  
   glutSwapBuffers();
 }
+
+void Window::drawMap()
+{
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  // clear color and depth buffers
+  glMatrixMode(GL_MODELVIEW);  // make sure we're in Modelview mode
+
+  glLoadMatrixd(Globals::map.getCamera().getCameraMatrix());
+  //gluLookAt(0.0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+
+  glEnableClientState( GL_COLOR_ARRAY );
+  glEnableClientState( GL_VERTEX_ARRAY );
+  glColorPointer( 3, GL_FLOAT, 0, Globals::map.s_colors);
+  glVertexPointer( 3, GL_FLOAT, 0, Globals::map.s_vertices);
+  glDrawElements( GL_TRIANGLES, Globals::map.s_nIndices, GL_UNSIGNED_INT, Globals::map.s_indices );
+  glFlush();  
+  glutSwapBuffers();
+}
+
 
 void Window::drawCube()
 {
